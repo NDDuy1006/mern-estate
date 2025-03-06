@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { signInStart, signInSuccess, signInFailure } from "../store/user/userSlice"
 import { Link, useNavigate } from "react-router-dom"
 
 export default function SignIn() {
@@ -7,10 +9,11 @@ export default function SignIn() {
     email: "",
     password: "",
   })
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const { error, loading } = useSelector((state) => state.user)
 
   const navigate = useNavigate()
+
+  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     const { id, value } = e.target
@@ -21,7 +24,7 @@ export default function SignIn() {
     e.preventDefault()
 
     try {
-      setLoading(true)
+      dispatch(signInStart())
 
       const res = await fetch(
         "/api/auth/sign-in",
@@ -36,16 +39,13 @@ export default function SignIn() {
 
       const data = await res.json()
       if (data.success === false) {
-        setError(data.message)
-        setLoading(false)
+        dispatch(signInFailure(data.message))
         return
       }
-      setError(null)
-      setLoading(false)
+      dispatch(signInSuccess(data))
       navigate("/")
     } catch (error) {
-      setLoading(false)
-      setError(error.message)
+      dispatch(signInFailure(error.message))
     }
 
   }
