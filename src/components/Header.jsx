@@ -9,8 +9,7 @@ const Header = () => {
         <Link to="/">
           <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
             <span className="text-slate-500">Havan</span>
-            <span className="text-slate-500">Horizon</span>
-            <span className="text-secondary-theme">Home</span>
+            <span className="text-secondary-theme">Horizon</span>
           </h1>
         </Link>
         <form className="bg-slate-200 p-3 rounded flex items-center">
