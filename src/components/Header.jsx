@@ -41,7 +41,7 @@ const Header = () => {
                   ? (<img
                     src={currentUser.avatar || ""}
                     alt="profile"
-                    className="rounded-full h-7 w-7 object-cover bg-slate-100"
+                    className="rounded-full h-7 w-7 bg-slate-100"
                     referrerpolicy="no-referrer"
                   />)
                   : (

@@ -4,16 +4,16 @@ import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyB3n9kB_Qz0bFfM-UnO2tyhlNJQekgPM4w",
-  authDomain: "mern-realtor-8c892.firebaseapp.com",
-  projectId: "mern-realtor-8c892",
-  storageBucket: "mern-realtor-8c892.firebasestorage.app",
-  messagingSenderId: "101255552670",
-  appId: "1:101255552670:web:ae951ff4274dc3eb86a58f",
-  measurementId: "G-6SS4EWZJ60"
+  apiKey: "AIzaSyDvzaSmuHLCGsyEdNpxYXnzbul95y4P76k",
+  authDomain: "my-realtor-c17bf.firebaseapp.com",
+  projectId: "my-realtor-c17bf",
+  storageBucket: "my-realtor-c17bf.appspot.com",
+  messagingSenderId: "196589119117",
+  appId: "1:196589119117:web:3de93e181a28df3b12a4c4"
 };
 
 // Initialize Firebase
