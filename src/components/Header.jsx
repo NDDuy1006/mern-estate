@@ -45,7 +45,7 @@ const Header = () => {
                     referrerpolicy="no-referrer"
                   />)
                   : (
-                    <DefaultProfileAvatar userFirstname={currentUser.firstname} className="h-7 w-7" />
+                    null
                   )
               }
             </Link>
