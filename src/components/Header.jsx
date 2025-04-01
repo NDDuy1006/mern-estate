@@ -1,13 +1,35 @@
 import { FaSearch } from "react-icons/fa"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { useEffect, useState } from "react"
 // import DefaultProfileAvatar from "./DefaultProfileAvatar"
 
 const Header = () => {
   const { currentUser } = useSelector(state => state.user)
+  const [scrolled, setScrolled] = useState(false)
+  const location = useLocation()
+
+  const isListingPage = location.pathname.startsWith("/listing/")
+
+  useEffect(() => {
+    if (!isListingPage) return;
+
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        setScrolled(true)
+      } else {
+        setScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
-    <header className="bg-main-theme text-secondary-theme shadow-md">
+    <header
+      className={`bg-main-theme fixed top-0 z-10 w-full text-secondary-theme shadow-md transition-transform duration-300 ease-in-out ${isListingPage ? scrolled ? "translate-y-0 fixed top-0 z-10 w-full" : "-translate-y-20 fixed top-0 z-10 w-full" : "translate-y-0"}`}
+    >
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <Link to="/">
           <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">

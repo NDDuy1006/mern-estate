@@ -80,8 +80,8 @@ export default function CreateListing() {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
+          // eslint-disable-next-line no-unused-vars
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          console.log(progress);
 
         },
         (error) => {

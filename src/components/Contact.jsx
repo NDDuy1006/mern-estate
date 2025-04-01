@@ -16,9 +16,8 @@ export default function Contact({ listing }) {
         const res = await fetch(`/api/user/${listing.userRef}`)
         const data = await res.json()
         setLandlord(data)
-      } catch (error) {
-        console.log(error);
-      }
+        // eslint-disable-next-line no-unused-vars, no-empty
+      } catch (error) { }
     }
     fetchLandlord()
   }, [listing.userRef])

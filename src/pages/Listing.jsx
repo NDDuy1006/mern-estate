@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Swiper, SwiperSlide } from "swiper/react"
 import SwiperCore from "swiper"
-import { Navigation } from "swiper/modules"
+import { Navigation, Autoplay } from "swiper/modules"
 import "swiper/css/bundle"
 import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking, FaShare } from "react-icons/fa"
 import { useSelector } from "react-redux"
@@ -20,6 +20,8 @@ export default function Listing() {
   const [copied, setCopied] = useState(false)
   const [contact, setContact] = useState(false)
   const params = useParams()
+  console.log(listing);
+
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -54,19 +56,33 @@ export default function Listing() {
       {
         listing && !loading && !error && (
           <>
-            <Swiper navigation>
+            <Swiper
+              modules={[Autoplay, Navigation]}
+              navigation
+              loop={true}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false
+              }}
+              speed={800}
+            >
               {listing.imageUrls.map((url) => (
                 <SwiperSlide key={url}>
-                  <div
-                    className="h-[720px]"
-                    style={{
-                      backgroundSize: "cover",
-                      backgroundImage: `url("${url}")`,
-                      backgroundRepeat: "no-repeat"
-                    }}
-                  ></div>
+                  <div className="h-screen">
+                    <img src={url} alt="cover" className="w-full h-full object-cover" />
+                  </div>
                 </SwiperSlide>
               ))}
+              <style>
+                {`
+                  .swiper-button-prev, .swiper-button-next {
+                    z-index: 20;
+                    color: #c98f2b;
+                  }
+                `}
+              </style>
+              {/* <div className="absolute top-0 left-0 h-full w-1/12 bg-gradient-to-r from-black to-transparent pointer-events-none opacity-90 z-10" />
+              <div className="absolute top-0 right-0 h-full w-1/12 bg-gradient-to-l from-black to-transparent pointer-events-none opacity-80 z-10" /> */}
             </Swiper>
             <div
               className="fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer"
@@ -94,15 +110,15 @@ export default function Listing() {
                 {listing.type === "rent" && " / month"}
               </p>
               <p className="flex items-center mt-6 gap-2 text-slate-600 text-sm">
-                <FaMapMarkerAlt className="text-green-700" />
+                <FaMapMarkerAlt className="text-main-theme" />
                 {listing.address}
               </p>
               <div className="flex gap-4">
-                <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                <p className="bg-main-theme w-full max-w-[200px] text-white text-center p-1 rounded-md">
                   {listing.type === "rent" ? "For Rent" : "For Sale"}
                 </p>
                 {listing.offer && (
-                  <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                  <p className="bg-secondary-theme w-full max-w-[200px] text-white text-center p-1 rounded-md">
                     ${+listing.regularPrice - +listing.discountPrice}
                   </p>
                 )}
@@ -113,7 +129,7 @@ export default function Listing() {
                 </span>
                 {listing.description}
               </p>
-              <ul className="flex flex-wrap items-center gap-4 sm:gap-6 text-green-900 font-semibold text-sm">
+              <ul className="flex flex-wrap items-center gap-4 sm:gap-6 text-main-theme font-semibold text-sm">
                 <li className="flex items-center gap-1 whitespace-nowrap">
                   <FaBed className="text-lg" />
                   {listing.bedrooms > 1 ? `${listing.bedrooms} bedrooms` : `${listing.bedrooms} bedroom`}

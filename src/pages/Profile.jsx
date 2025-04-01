@@ -15,6 +15,7 @@ import {
 import { useDispatch } from "react-redux"
 import { app } from "../firebase"
 import { Link } from "react-router-dom"
+import { FaExclamationCircle } from "react-icons/fa"
 
 export default function Profile() {
   const dispatch = useDispatch()
@@ -146,8 +147,8 @@ export default function Profile() {
       }
 
       setListing(data)
+      // eslint-disable-next-line no-unused-vars
     } catch (err) {
-      console.log(err);
       setShowListingError(true)
     }
   }
@@ -160,14 +161,12 @@ export default function Profile() {
 
       const data = await res.json()
       if (data.success === false) {
-        console.log(data.message)
         return
       }
 
       setListing((prev) => prev.filter((listing) => listing._id !== listingId))
-    } catch (error) {
-      console.log(error.message);
-    }
+      // eslint-disable-next-line no-unused-vars, no-empty
+    } catch (error) { }
   }
 
   return (
@@ -243,7 +242,7 @@ export default function Profile() {
           {loading ? "Loading..." : "Update"}
         </button>
         <Link
-          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
+          className="bg-secondary-theme text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
           to={"/create-listing"}
         >
           Create listing
@@ -252,8 +251,9 @@ export default function Profile() {
       <div className="flex justify-between mt-5">
         <span
           onClick={handleDeleteUser}
-          className=" text-red-700 cursor-pointer"
+          className=" text-red-700 cursor-pointer flex items-center gap-1"
         >
+          <FaExclamationCircle />
           Delete Account
         </span>
         <span
