@@ -1,11 +1,13 @@
 import { FaSearch } from "react-icons/fa"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 // import DefaultProfileAvatar from "./DefaultProfileAvatar"
 
 const Header = () => {
   const { currentUser } = useSelector(state => state.user)
+  const navigate = useNavigate()
+  const [searchTerm, setSearchTerm] = useState("")
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
 
@@ -26,9 +28,25 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const urlSearchTerm = urlParams.get("searchTerm")
+    if (urlSearchTerm) {
+      setSearchTerm(urlSearchTerm)
+    }
+  }, [location.search])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const urlParams = new URLSearchParams(window.location.search)
+    urlParams.set("searchTerm", searchTerm)
+    const searchQuery = urlParams.toString()
+    navigate(`search?${searchQuery}`)
+  }
+
   return (
     <header
-      className={`bg-main-theme fixed top-0 z-10 w-full text-secondary-theme shadow-md transition-transform duration-300 ease-in-out ${isListingPage ? scrolled ? "translate-y-0 fixed top-0 z-10 w-full" : "-translate-y-20 fixed top-0 z-10 w-full" : "translate-y-0"}`}
+      className={`bg-main-theme text-secondary-theme shadow-md transition-transform duration-300 ease-in-out ${isListingPage ? scrolled ? "translate-y-0 fixed top-0 z-10 w-full" : "-translate-y-20 fixed top-0 z-10 w-full" : "translate-y-0"}`}
     >
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <Link to="/">
@@ -37,13 +55,20 @@ const Header = () => {
             <span className="text-secondary-theme">Horizon</span>
           </h1>
         </Link>
-        <form className="bg-slate-200 p-3 rounded flex items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-slate-200 p-3 rounded flex items-center"
+        >
           <input
             type="text"
             placeholder="Search..."
-            className="bg-transparent focus:outline-none w-24 sm:w-64"
+            className="bg-transparent focus:outline-none w-24 sm:w-64 text-black"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchTerm}
           />
-          <FaSearch className="text-slate-600" />
+          <button>
+            <FaSearch className="text-slate-600" />
+          </button>
         </form>
         <ul className="flex gap-4">
           <Link to="/">
