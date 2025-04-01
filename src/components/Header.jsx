@@ -66,7 +66,10 @@ const Header = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             value={searchTerm}
           />
-          <button>
+          <button
+            disabled={searchTerm.length < 1}
+            className={`${searchTerm.length < 1 && "opacity-75"}`}
+          >
             <FaSearch className="text-slate-600" />
           </button>
         </form>
