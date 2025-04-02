@@ -20,8 +20,6 @@ export default function Listing() {
   const [copied, setCopied] = useState(false)
   const [contact, setContact] = useState(false)
   const params = useParams()
-  console.log(listing);
-
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -49,7 +47,7 @@ export default function Listing() {
     fetchListing()
   }, [params.listingId])
   return (
-    <main>
+    <main className=" mt-[72px]">
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
       {error && <p className="text-center my-7 text-2xl">Something went wrong!</p>}
 
@@ -119,7 +117,7 @@ export default function Listing() {
                 </p>
                 {listing.offer && (
                   <p className="bg-secondary-theme w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                    ${+listing.regularPrice - +listing.discountPrice}
+                    ${+listing.regularPrice - +listing.discountPrice} {" "} OFF
                   </p>
                 )}
               </div>
@@ -144,7 +142,7 @@ export default function Listing() {
                 </li>
                 <li className="flex items-center gap-1 whitespace-nowrap">
                   <FaChair className="text-lg" />
-                  {listing.furnished ? "Furnished" : "unfurnished"}
+                  {listing.furnished ? "Furnished" : "Unfurnished"}
                 </li>
               </ul>
               {currentUser && listing.userRef !== currentUser._id && !contact && (
