@@ -47,7 +47,7 @@ export default function Listing() {
     fetchListing()
   }, [params.listingId])
   return (
-    <main className=" mt-[72px]">
+    <div>
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
       {error && <p className="text-center my-7 text-2xl">Something went wrong!</p>}
 
@@ -158,6 +158,6 @@ export default function Listing() {
           </>
         )
       }
-    </main>
+    </div>
   )
 }

@@ -3,13 +3,13 @@ import { Link } from "react-router-dom"
 
 export default function ListingCard({ listing }) {
   return (
-    <div className="bg-white shadow-md hover:shadow-lg transition-shadow rounded-lg w-full sm:w-[330px] overflow-hidden">
+    <div className="bg-white shadow-md hover:shadow-lg transition-shadow rounded-lg w-full sm:w-[330px] overflow-hidden group">
       <Link to={`/listing/${listing._id}`}>
         <div className="h-[320px] sm:h-[220px] overflow-hidden">
           <img
             src={listing.imageUrls[0] || "https://www.propertymanagementconsulting.com/hubfs/Stock%20images/Real%20estate%20agent%20offer%20house%20represented%20by%20model.jpg"}
             alt="cover"
-            className='w-full object-cover hover:scale-105 transition duration-300'
+            className='w-full object-cover group-hover:scale-105 transition duration-300'
           />
         </div>
         <div className="p-3 flex flex-col gap-2 w-full">
@@ -45,3 +45,5 @@ export default function ListingCard({ listing }) {
     </div>
   )
 }
+
+
