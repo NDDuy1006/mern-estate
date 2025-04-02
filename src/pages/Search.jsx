@@ -1,7 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 
 export default function Search() {
+  const navigate = useNavigate()
+  const [loading, setLoadding] = useState()
+  const [listings, setListings] = useState()
   const [sidebarData, setSidebarData] = useState({
     searchTerm: "",
     type: "all",
@@ -11,6 +15,50 @@ export default function Search() {
     sort: "created_at",
     order: "desc"
   })
+  console.log(listings);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search)
+    const searchTerm = urlParams.get("searchTerm")
+    const type = urlParams.get("type")
+    const parking = urlParams.get("parking")
+    const furnished = urlParams.get("furnished")
+    const offer = urlParams.get("offer")
+    const sort = urlParams.get("sort")
+    const order = urlParams.get("order")
+
+    if (
+      searchTerm ||
+      type ||
+      parking ||
+      furnished ||
+      offer ||
+      sort ||
+      order
+    ) {
+      setSidebarData({
+        searchTerm: searchTerm || "",
+        type: type || "",
+        parking: parking === "true" ? true : false,
+        furnished: furnished === "true" ? true : false,
+        offer: offer === "true" ? true : false,
+        sort: sort || "created_at",
+        order: order || "desc"
+      })
+    }
+
+    const fetchListings = async () => {
+      setLoadding(true)
+
+      const searchQuery = urlParams.toString()
+      const res = await fetch(`/api/listing/get?${searchQuery}`)
+      const data = await res.json()
+      setListings(data)
+
+      setLoadding(false)
+    }
+    fetchListings()
+  }, [location.search])
 
   const handleChange = (e) => {
     if (e.target.id === "all" || e.target.id === "rent" || e.target.id === "sell") {
@@ -33,14 +81,29 @@ export default function Search() {
       const sort = e.target.value.split("_")[0] || "created_at"
       const order = e.target.value.split("_")[1] || "desc"
 
-      setSidebarData({ ...sidebarData, type: e.target.id })
+      setSidebarData({ ...sidebarData, sort, order })
     }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const urlParams = new URLSearchParams()
+    urlParams.set("searchTerm", sidebarData.searchTerm)
+    urlParams.set("type", sidebarData.type)
+    urlParams.set("parking", sidebarData.parking)
+    urlParams.set("furnished", sidebarData.furnished)
+    urlParams.set("offer", sidebarData.offer)
+    urlParams.set("order", sidebarData.order)
+
+    const searchQuery = urlParams.toString()
+    navigate(`/search?${searchQuery}`)
   }
 
   return (
     <div className="flex flex-col md:flex-row">
       <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
-        <form className="flex flex-col gap-8">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div className="flex items-center gap-2">
             <label className="whitespace-nowrap font-semibold">Search Term: </label>
             <input

@@ -68,7 +68,7 @@ export default function Listing() {
             >
               {listing.imageUrls.map((url) => (
                 <SwiperSlide key={url}>
-                  <div className="h-screen">
+                  <div className="h-[480px]">
                     <img src={url} alt="cover" className="w-full h-full object-cover" />
                   </div>
                 </SwiperSlide>
@@ -81,8 +81,8 @@ export default function Listing() {
                   }
                 `}
               </style>
-              {/* <div className="absolute top-0 left-0 h-full w-1/12 bg-gradient-to-r from-black to-transparent pointer-events-none opacity-90 z-10" />
-              <div className="absolute top-0 right-0 h-full w-1/12 bg-gradient-to-l from-black to-transparent pointer-events-none opacity-80 z-10" /> */}
+              <div className="absolute top-0 left-0 h-full w-1/12 bg-gradient-to-r from-black to-transparent pointer-events-none opacity-90 z-10" />
+              <div className="absolute top-0 right-0 h-full w-1/12 bg-gradient-to-l from-black to-transparent pointer-events-none opacity-80 z-10" />
             </Swiper>
             <div
               className="fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer"
@@ -109,7 +109,7 @@ export default function Listing() {
                 {listing.offer ? listing.discountPrice.toLocaleString("en-US") : listing.regularPrice.toLocaleString("en-US")}
                 {listing.type === "rent" && " / month"}
               </p>
-              <p className="flex items-center mt-6 gap-2 text-slate-600 text-sm">
+              <p className="flex items-center gap-2 text-slate-600 text-sm">
                 <FaMapMarkerAlt className="text-main-theme" />
                 {listing.address}
               </p>
