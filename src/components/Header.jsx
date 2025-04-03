@@ -47,7 +47,7 @@ const Header = () => {
 
   return (
     <header
-      className={`bg-main-theme fixed z-40 top-0 text-secondary-theme shadow-md transition-transform duration-300 ease-in-out w-full ${isListingPage ? scrolled ? "translate-y-0" : "translate-y-0" : "translate-y-0"}
+      className={`bg-main-theme text-secondary-theme shadow-md transition-transform duration-300 ease-in-out w-full ${isListingPage ? scrolled ? "translate-y-0 fixed z-40 top-0" : "translate-y-0 fixed z-40 top-0" : "translate-y-0"}
       `}
     >
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">

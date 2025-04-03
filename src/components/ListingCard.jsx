@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function ListingCard({ listing }) {
   return (
-    <div className="bg-white shadow-md hover:shadow-lg transition-shadow rounded-lg w-[330px] 2xl:w-[344px] overflow-hidden group">
+    <div className="bg-white shadow-md hover:shadow-lg transition-shadow rounded-lg w-[330px] 2xl:w-[344px] overflow-hidden group max-h-[412px]">
       <Link to={`/listing/${listing._id}`}>
         <div className="h-[220px] overflow-hidden">
           <img
