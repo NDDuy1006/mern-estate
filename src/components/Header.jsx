@@ -75,7 +75,7 @@ const Header = () => {
             <FaSearch className="text-slate-600" />
           </button>
         </form>
-        <ul className="flex gap-4">
+        <ul className="flex gap-4 items-center">
           <Link to="/">
             <li className="hidden sm:inline hover:underline cursor-pointer">
               Home
@@ -93,7 +93,7 @@ const Header = () => {
                   ? (<img
                     src={currentUser.avatar || ""}
                     alt="profile"
-                    className="rounded-full h-7 w-7 bg-slate-100"
+                    className="rounded-full h-10 w-10 bg-slate-100"
                     referrerpolicy="no-referrer"
                   />)
                   : (

@@ -233,7 +233,7 @@ export default function Search() {
       </div>
       <div className="flex-1">
         <h1 className="text-3xl font-semibold border-b p-3 text-slate-700 mt-5">Results</h1>
-        <div className="p-7 flex flex-wrap gap-4">
+        <div className="p-5 pb-4 md:pb-2 flex flex-wrap gap-4 md:overflow-y-auto md:flex-grow md:h-[calc(100vh-160px)]">
           {!loading && listings.length === 0 && (
             <p className="text-xl text-slate-700">No listing found.</p>
           )}
@@ -248,15 +248,15 @@ export default function Search() {
               />
             ))
           }
+          {showMore && (
+            <button
+              onClick={onShowMore}
+              className="text-secondary-theme hover:underline px-7 py-3 w-full text-center"
+            >
+              Show more
+            </button>
+          )}
         </div>
-        {showMore && (
-          <button
-            onClick={onShowMore}
-            className="text-secondary-theme hover:underline px-7 py-3 w-full text-center"
-          >
-            Show more
-          </button>
-        )}
       </div>
     </div>
   )
