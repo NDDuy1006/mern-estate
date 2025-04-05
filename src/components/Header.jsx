@@ -76,16 +76,6 @@ const Header = () => {
           </button>
         </form>
         <ul className="flex gap-4 items-center">
-          <Link to="/">
-            <li className="hidden sm:inline hover:underline cursor-pointer">
-              Home
-            </li>
-          </Link>
-          <Link to="/about">
-            <li className="hidden sm:inline hover:underline cursor-pointer">
-              About
-            </li>
-          </Link>
           {currentUser ? (
             <Link to="/profile">
               {
