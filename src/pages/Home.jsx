@@ -53,7 +53,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div>
+    <div className="">
       <div className="flex flex-col gap-6 py-20 px-3 max-w-6xl mx-auto">
         <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
           Find your next <span className="text-secondary-theme">perfect</span>
@@ -136,7 +136,7 @@ export default function Home() {
                 <h2
                   className="text-2xl font-semibold text-slate-600"
                 >
-                  Recent offers
+                  Places for sale
                 </h2>
                 <Link
                   className="text-sm text-blue-800 hover:underline"
@@ -167,7 +167,7 @@ export default function Home() {
                 <h2
                   className="text-2xl font-semibold text-slate-600"
                 >
-                  Recent offers
+                  Places for rent
                 </h2>
                 <Link
                   className="text-sm text-blue-800 hover:underline"

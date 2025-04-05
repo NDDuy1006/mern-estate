@@ -53,6 +53,7 @@ export default function CreateListing() {
     }
   }
 
+  // Image Upload with Firebase
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
       const storage = getStorage(app)
@@ -152,7 +153,7 @@ export default function CreateListing() {
   }
 
   return (
-    <main className="p-3 max-w-4xl mx-auto">
+    <div className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
         Create a Listing
       </h1>
@@ -370,6 +371,6 @@ export default function CreateListing() {
           {error && <p className="text-red-700 text-sm">{error}</p>}
         </div>
       </form>
-    </main>
+    </div>
   )
 }
